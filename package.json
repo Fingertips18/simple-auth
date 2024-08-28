@@ -1,0 +1,26 @@
+{
+  "name": "mern-auth",
+  "version": "1.0.0",
+  "main": "backend/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon backend/index.js"
+  },
+  "keywords": [],
+  "author": "Ghian Carlos Tan",
+  "license": "ISC",
+  "description": "",
+  "type": "module",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jose": "^5.8.0",
+    "mailtrap": "^3.4.0",
+    "mongoose": "^8.5.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
