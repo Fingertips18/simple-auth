@@ -5,10 +5,10 @@ import { AuthRoutes } from "../constants/routes.js";
 
 const router = express.Router();
 
-router.get(AuthRoutes.signUp.path, AuthController.signUp);
+router.post(AuthRoutes.signUp.path, AuthController.signUp);
 
-router.get(AuthRoutes.signIn.path, AuthController.signIn);
+router.post(AuthRoutes.signIn.path, AuthController.signIn);
 
-router.get(AuthRoutes.signOut.path, AuthController.signOut);
+router.post(AuthRoutes.signOut.path, AuthController.signOut);
 
 export default router;

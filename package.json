@@ -6,10 +6,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon backend/index.js"
   },
-  "keywords": [],
+  "keywords": [
+    "express.js, javascript, mern, authentication, jwt"
+  ],
   "author": "Ghian Carlos Tan",
   "license": "ISC",
-  "description": "",
+  "description": "This project is a full-featured authentication system built using the MERN stack (MongoDB, Express.js, React, and Node.js). It provides secure user registration, login, and token-based authentication with JWT. The application includes user role management, password encryption, and responsive UI for seamless user experience.",
   "type": "module",
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -21,6 +23,8 @@
     "mongoose": "^8.5.4"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/express": "^4.17.21",
     "nodemon": "^3.1.4"
   }
 }
