@@ -1,5 +1,7 @@
 import bcryptjs from "bcryptjs";
+import crypto from "crypto";
 
+import { sendResetPasswordEmail } from "../utils/send-reset-password-email.js";
 import { sendEmailVerification } from "../utils/send-email-verification.js";
 import { generateTokenCookie } from "../utils/generate-token-cookie.js";
 import { sendWelcomeEmail } from "../utils/send-welcome-email.js";
@@ -47,6 +49,7 @@ const AuthController = {
         },
       });
     } catch (error) {
+      console.error("Sign up failed!", error);
       res.status(409).json({ message: error.message });
     }
   },
@@ -84,7 +87,7 @@ const AuthController = {
         },
       });
     } catch (error) {
-      console.error("Signing in failed!", error);
+      console.error("Sign in failed!", error);
       res.status(401).json({ message: error.message });
     }
   },
@@ -125,6 +128,7 @@ const AuthController = {
         },
       });
     } catch (error) {
+      console.error("Email verification failed!", error);
       res.status(400).json({ message: error.message });
     }
   },
@@ -135,7 +139,29 @@ const AuthController = {
       if (!email) {
         throw new Error("Missing email!");
       }
-    } catch (error) {}
+
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        throw new Error("Email doesn't exist!");
+      }
+
+      const resetPasswordToken = crypto.randomBytes(64).toString("hex");
+
+      user.resetPasswordToken = resetPasswordToken;
+      user.resetPasswordExpiresAt = Date.now() + 1 * 60 * 60 * 1000;
+
+      user.save();
+
+      sendResetPasswordEmail(user.email, resetPasswordToken);
+
+      res.status(200).json({
+        message: "Password resent link has been sent to your email!",
+      });
+    } catch (error) {
+      console.error("Forgot password failed!", error);
+      res.status(401).json({ message: error.message });
+    }
   },
 };
 

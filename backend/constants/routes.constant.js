@@ -8,4 +8,5 @@ export const AuthRoutes = Object.freeze({
   signOut: { name: "sign-out", path: "/sign-out" },
   verifyEmail: { name: "verify-email", path: "/verify-email" },
   forgotPassword: { name: "forgot-password", path: "/forgot-password" },
+  resetPassword: { name: "reset-password", path: "/reset-password" },
 });
