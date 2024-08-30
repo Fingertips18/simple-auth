@@ -54,7 +54,8 @@ const AuthController = {
     res.send("Sign in route");
   },
   signOut: async (_, res) => {
-    res.send("Sign out route");
+    res.clearCookie("token");
+    res.status(200).json({ message: "Signed out successfully!" });
   },
   verifyEmail: async (req, res) => {
     const { token } = req.body;
