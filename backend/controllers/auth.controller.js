@@ -46,12 +46,47 @@ const AuthController = {
           password: undefined,
         },
       });
-    } catch (e) {
-      res.status(409).json({ message: e.message });
+    } catch (error) {
+      res.status(409).json({ message: error.message });
     }
   },
-  signIn: async (_, res) => {
-    res.send("Sign in route");
+  signIn: async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+      if (!email || !password) {
+        throw new Error("Missing email or password!");
+      }
+
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        throw new Error("Invalid credentials!");
+      }
+
+      const isPasswordValid = await bcryptjs.compare(password, user.password);
+
+      if (!isPasswordValid) {
+        throw new Error("Invalid credentials!");
+      }
+
+      await generateTokenCookie(res, user._id);
+
+      user.lastSignedIn = new Date();
+
+      await user.save();
+
+      res.status(200).json({
+        message: "Signed in successfully!",
+        user: {
+          ...user._doc,
+          password: undefined,
+        },
+      });
+    } catch (error) {
+      console.error("Signing in failed!", error);
+      res.status(401).json({ message: error.message });
+    }
   },
   signOut: async (_, res) => {
     res.clearCookie("token");
@@ -61,13 +96,17 @@ const AuthController = {
     const { token } = req.body;
 
     try {
+      if (!token) {
+        throw new Error("Missing token!");
+      }
+
       const user = await User.findOne({
         verificationToken: token,
         verificationTokenExpiresAt: { $gt: Date.now() },
       });
 
       if (!user) {
-        throw new Error("Invalid or expired verification token");
+        throw new Error("Invalid or expired verification token!");
       }
 
       user.isVerified = true;
@@ -88,6 +127,15 @@ const AuthController = {
     } catch (error) {
       res.status(400).json({ message: error.message });
     }
+  },
+  forgotPassword: async (req, res) => {
+    const { email } = req.body;
+
+    try {
+      if (!email) {
+        throw new Error("Missing email!");
+      }
+    } catch (error) {}
   },
 };
 

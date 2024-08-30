@@ -7,4 +7,5 @@ export const AuthRoutes = Object.freeze({
   signIn: { name: "sign-in", path: "/sign-in" },
   signOut: { name: "sign-out", path: "/sign-out" },
   verifyEmail: { name: "verify-email", path: "/verify-email" },
+  forgotPassword: { name: "forgot-password", path: "/forgot-password" },
 });

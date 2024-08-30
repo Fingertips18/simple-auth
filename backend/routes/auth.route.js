@@ -13,4 +13,6 @@ router.post(AuthRoutes.signOut.path, AuthController.signOut);
 
 router.post(AuthRoutes.verifyEmail.path, AuthController.verifyEmail);
 
+router.post(AuthRoutes.forgotPassword.path, AuthController.forgotPassword);
+
 export default router;
