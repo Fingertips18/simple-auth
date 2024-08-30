@@ -2,6 +2,7 @@ import bcryptjs from "bcryptjs";
 
 import { sendEmailVerification } from "../utils/send-email-verification.js";
 import { generateTokenCookie } from "../utils/generate-token-cookie.js";
+import { sendWelcomeEmail } from "../utils/send-welcome-email.js";
 import User from "../models/user.model.js";
 
 const AuthController = {
@@ -54,6 +55,38 @@ const AuthController = {
   },
   signOut: async (_, res) => {
     res.send("Sign out route");
+  },
+  verifyEmail: async (req, res) => {
+    const { token } = req.body;
+
+    try {
+      const user = await User.findOne({
+        verificationToken: token,
+        verificationTokenExpiresAt: { $gt: Date.now() },
+      });
+
+      if (!user) {
+        throw new Error("Invalid or expired verification token");
+      }
+
+      user.isVerified = true;
+      user.verificationToken = undefined;
+      user.verificationTokenExpiresAt = undefined;
+
+      await user.save();
+
+      await sendWelcomeEmail(user.username, user.email);
+
+      res.status(200).json({
+        message: "Email verified successfully!",
+        user: {
+          ...user._doc,
+          password: undefined,
+        },
+      });
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
   },
 };
 
