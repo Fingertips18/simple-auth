@@ -1,5 +1,6 @@
 import bcryptjs from "bcryptjs";
 
+import { sendEmailVerification } from "../utils/send-email-verification.js";
 import { generateTokenCookie } from "../utils/generate-token-cookie.js";
 import User from "../models/user.model.js";
 
@@ -34,6 +35,8 @@ const AuthController = {
       await user.save();
 
       await generateTokenCookie(res, user._id);
+
+      await sendEmailVerification(user.email, verificationToken);
 
       return res.status(201).json({
         message: "User created successfully",
