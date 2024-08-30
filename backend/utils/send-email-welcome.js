@@ -1,6 +1,6 @@
 import { mailtrapClient, sender } from "../configs/mailtrap.config.js";
 
-export const sendWelcomeEmail = async (username, email) => {
+export const sendEmailWelcome = async (username, email) => {
   const recipients = [{ email }];
 
   try {
@@ -16,6 +16,6 @@ export const sendWelcomeEmail = async (username, email) => {
     console.log("Welcome email sent successfully!", response);
   } catch (error) {
     console.error("Error sending welcome email!", error);
-    throw new Error(`Error sending email: ${error}`);
+    throw new Error(`Error sending welcome email: ${error}`);
   }
 };

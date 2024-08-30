@@ -15,4 +15,9 @@ router.post(AuthRoutes.verifyEmail.path, AuthController.verifyEmail);
 
 router.post(AuthRoutes.forgotPassword.path, AuthController.forgotPassword);
 
+router.post(
+  `${AuthRoutes.resetPassword.path}/:token`,
+  AuthController.resetPassword
+);
+
 export default router;

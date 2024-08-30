@@ -1,10 +1,11 @@
 import bcryptjs from "bcryptjs";
 import crypto from "crypto";
 
-import { sendResetPasswordEmail } from "../utils/send-reset-password-email.js";
+import { sendEmailResetPassword } from "../utils/send-email-reset-password.js";
+import { sendEmailResetSuccess } from "../utils/send-email-reset-success.js";
 import { sendEmailVerification } from "../utils/send-email-verification.js";
 import { generateTokenCookie } from "../utils/generate-token-cookie.js";
-import { sendWelcomeEmail } from "../utils/send-welcome-email.js";
+import { sendEmailWelcome } from "../utils/send-email-welcome.js";
 import User from "../models/user.model.js";
 
 const AuthController = {
@@ -118,7 +119,7 @@ const AuthController = {
 
       await user.save();
 
-      await sendWelcomeEmail(user.username, user.email);
+      await sendEmailWelcome(user.username, user.email);
 
       res.status(200).json({
         message: "Email verified successfully!",
@@ -153,7 +154,7 @@ const AuthController = {
 
       user.save();
 
-      sendResetPasswordEmail(user.email, resetPasswordToken);
+      sendEmailResetPassword(user.email, resetPasswordToken);
 
       res.status(200).json({
         message: "Password resent link has been sent to your email!",
@@ -161,6 +162,40 @@ const AuthController = {
     } catch (error) {
       console.error("Forgot password failed!", error);
       res.status(401).json({ message: error.message });
+    }
+  },
+  resetPassword: async (req, res) => {
+    const { token } = req.params;
+    const { password } = req.body;
+
+    try {
+      if (!token || !password) {
+        throw new Error("Token or password is missing!");
+      }
+
+      const user = await User.findOne({
+        resetPasswordToken: token,
+        resetPasswordExpiresAt: { $gt: Date.now() },
+      });
+
+      if (!user) {
+        throw new Error("Invalid or expired reset token!");
+      }
+
+      const hashedPassword = await bcryptjs.hash(password, 12);
+
+      user.password = hashedPassword;
+      user.resetPasswordToken = undefined;
+      user.resetPasswordExpiresAt = undefined;
+
+      await user.save();
+
+      await sendEmailResetSuccess(user.email);
+
+      res.status(200).json({ message: "Password reset successful!" });
+    } catch (error) {
+      console.error("Reset password failed", error);
+      res.status(400).json({ message: error.message });
     }
   },
 };
