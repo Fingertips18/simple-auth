@@ -198,6 +198,26 @@ const AuthController = {
       res.status(400).json({ message: error.message });
     }
   },
+  verifyToken: async (req, res) => {
+    try {
+      const user = await User.findById(req.userId);
+
+      if (!user) {
+        throw new Error("User not found!");
+      }
+
+      res.status(200).json({
+        message: "Token is still valid!",
+        user: {
+          ...user._doc,
+          password: undefined,
+        },
+      });
+    } catch (error) {
+      console.error("Verify token failed", error);
+      res.status(401).json({ message: error.message });
+    }
+  },
 };
 
 export default AuthController;

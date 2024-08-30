@@ -9,4 +9,5 @@ export const AuthRoutes = Object.freeze({
   verifyEmail: { name: "verify-email", path: "/verify-email" },
   forgotPassword: { name: "forgot-password", path: "/forgot-password" },
   resetPassword: { name: "reset-password", path: "/reset-password" },
+  verifyToken: { name: "verify-token", path: "/verify-token" },
 });

@@ -1,6 +1,6 @@
 import { SignJWT } from "jose";
 
-const secretKey = new TextEncoder().encode(process.env.SECRET_KEY);
+import { secretKey } from "../constants/keys.constant.js";
 
 export const generateTokenCookie = async (res, userId) => {
   const token = await new SignJWT({ userId })
