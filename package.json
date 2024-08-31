@@ -7,7 +7,7 @@
     "dev": "nodemon backend/index.js"
   },
   "keywords": [
-    "express.js, javascript, mern, authentication, jwt"
+    "express-js, react-js, javascript, mern, authentication, jwt"
   ],
   "author": "Ghian Carlos Tan",
   "license": "ISC",

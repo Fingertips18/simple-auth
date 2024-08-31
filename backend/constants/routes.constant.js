@@ -1,4 +1,5 @@
 export const Routes = Object.freeze({
+  root: { name: "root", path: "/" },
   auth: { name: "auth", path: "/api/auth" },
 });
 
