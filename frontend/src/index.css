@@ -1,3 +1,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #fafbfb;
+    --foreground: #0f1113;
+    --primary: #718291;
+    --secondary: #c1b3af;
+    --accent: #adb099;
+  }
+
+  .dark {
+    --background: #050606;
+    --foreground: #ebedef;
+    --primary: #6d7e8d;
+    --secondary: #51423e;
+    --accent: #62654e;
+  }
+
+  * {
+    @apply box-border p-0 m-0 scroll-smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+  .flex-between {
+    @apply flex items-center justify-between;
+  }
+  .flex-start {
+    @apply flex items-center justify-start;
+  }
+  .flex-end {
+    @apply flex items-center justify-end;
+  }
+}

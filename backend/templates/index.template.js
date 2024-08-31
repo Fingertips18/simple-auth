@@ -26,7 +26,7 @@ export const INDEX_TEMPLATE = `
       height: 100dvh;
       font-family: 'Poppins', sans-serif;
       background-color: ${LightColors.background};
-      color: ${LightColors.text};
+      color: ${LightColors.foreground};
     "
   >
     <h1>Welcome to MERN Auth | Backend</h1>

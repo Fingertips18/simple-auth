@@ -1,8 +1,12 @@
+import { Grid } from "./components/grid";
+import { Orb } from "./components/orb";
+
 function App() {
   return (
-    <>
-      <h1 className="text-blue-500 text-2xl">Hello World</h1>
-    </>
+    <main className="min-h-dvh flex-center bg-background overflow-hidden relative">
+      <Orb />
+      <Grid />
+    </main>
   );
 }
 
