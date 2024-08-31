@@ -20,7 +20,7 @@ export default {
         "dark-accent": "#62654E",
       },
       dropShadow: {
-        glow: ["0 0px 15px var(--primary)", "0 0px 60px var(--primary)"],
+        glow: ["0 0px 15px var(--accent)", "0 0px 60px var(--accent)"],
         "foreground-glow": [
           "0 0px 15px var(--foreground)",
           "0 0px 60px var(--foreground)",

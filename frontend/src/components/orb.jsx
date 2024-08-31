@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 const Orb = () => {
   return (
     <motion.span
-      className="absolute w-1/2 h-full rounded-3xl bg-primary blur-lg"
+      className="absolute w-1/2 h-full rounded-3xl bg-dark-background blur-lg"
       animate={{
         x: ["-150%", "100%", "150%"],
       }}
@@ -11,6 +11,7 @@ const Orb = () => {
         duration: 15,
         ease: "linear",
         repeat: Infinity,
+        repeatType: "mirror",
       }}
       aria-hidden="true"
     />
