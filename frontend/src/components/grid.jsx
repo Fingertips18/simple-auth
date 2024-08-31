@@ -29,11 +29,11 @@ const Grid = () => {
 
       <span
         aria-hidden="true"
-        className="absolute w-full h-full bg-gradient-to-r from-background via-transparent to-background pointer-events-none"
+        className="fixed w-full h-full bg-gradient-to-r from-background via-transparent to-background pointer-events-none"
       />
       <span
         aria-hidden="true"
-        className="absolute w-full h-full bg-gradient-to-b from-background via-transparent to-background pointer-events-none"
+        className="fixed w-full h-full bg-gradient-to-b from-background via-transparent to-background pointer-events-none"
       />
     </>
   );

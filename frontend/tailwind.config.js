@@ -3,6 +3,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+      },
       colors: {
         background: "#FAFBFB",
         foreground: "#0F1113",
@@ -18,6 +21,10 @@ export default {
       },
       dropShadow: {
         glow: ["0 0px 15px var(--primary)", "0 0px 60px var(--primary)"],
+        "foreground-glow": [
+          "0 0px 15px var(--foreground)",
+          "0 0px 60px var(--foreground)",
+        ],
       },
     },
   },
