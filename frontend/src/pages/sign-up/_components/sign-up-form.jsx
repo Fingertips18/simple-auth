@@ -22,6 +22,8 @@ const SignUpForm = () => {
         placeholder="john doe"
         value={username}
         disabled={loading}
+        autoComplete="username"
+        name="username"
         onChange={(e) => setUsername(e.target.value)}
       />
       <Input
@@ -30,6 +32,8 @@ const SignUpForm = () => {
         placeholder="example@domain.com"
         value={email}
         disabled={loading}
+        autoComplete="email"
+        name="email"
         onChange={(e) => setEmail(e.target.value)}
       />
       <Input
@@ -38,6 +42,8 @@ const SignUpForm = () => {
         placeholder="Password"
         value={password}
         disabled={loading}
+        autoComplete="off"
+        name="password"
         onChange={(e) => setPassword(e.target.value)}
       />
 

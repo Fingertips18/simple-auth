@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 
+import VerifyEmailPage from "./pages/verify-email/page";
 import { AppRoutes } from "./constants/routes";
 import SignUpPage from "./pages/sign-up/page";
 import SignInPage from "./pages/sign-in/page";
@@ -16,6 +17,7 @@ function App() {
         <Route path={AppRoutes.root} element={<RootPage />} />
         <Route path={AppRoutes.signUp} element={<SignUpPage />} />
         <Route path={AppRoutes.signIn} element={<SignInPage />} />
+        <Route path={AppRoutes.verifyEmail} element={<VerifyEmailPage />} />
       </Routes>
     </main>
   );

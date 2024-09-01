@@ -22,6 +22,8 @@ const SignInForm = () => {
         placeholder="example@domain.com"
         value={email}
         disabled={loading}
+        autoComplete="email"
+        name="email"
         onChange={(e) => setEmail(e.target.value)}
       />
       <Input
@@ -30,6 +32,8 @@ const SignInForm = () => {
         placeholder="Password"
         value={password}
         disabled={loading}
+        autoComplete="off"
+        name="password"
         onChange={(e) => setPassword(e.target.value)}
       />
       <Link
