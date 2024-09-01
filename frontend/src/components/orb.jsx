@@ -11,7 +11,7 @@ const Orb = () => {
         duration: 15,
         ease: "linear",
         repeat: Infinity,
-        repeatType: "mirror",
+        repeatType: "loop",
       }}
       aria-hidden="true"
     />

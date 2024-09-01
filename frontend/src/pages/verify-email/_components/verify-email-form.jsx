@@ -57,6 +57,8 @@ const VerifyEmailForm = () => {
     }
   }, [code, submittedCode, onSubmit]);
 
+  const disabled = code.join("").length !== 4;
+
   return (
     <form onSubmit={onSubmit} className="space-y-6">
       <div className="flex-center gap-x-4">
@@ -78,9 +80,10 @@ const VerifyEmailForm = () => {
       </div>
       <button
         className="mt-5 w-full py-3 px-4 bg-accent font-bold rounded-lg shadow-lg hover:brightness-90
-        focus:outline-none hover:drop-shadow-glow transition duration-200 active:scale-90 flex-center"
+        focus:outline-none hover:drop-shadow-glow transition duration-200 flex-center active:scale-90
+        disabled:bg-accent/50 disabled:text-foreground/50 disabled:pointer-events-none"
         type="submit"
-        disabled={loading}
+        disabled={loading || disabled}
       >
         {loading ? "Verifying..." : "Verify Email"}
       </button>
