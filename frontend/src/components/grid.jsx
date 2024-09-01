@@ -21,7 +21,7 @@ const Grid = () => {
           return (
             <span
               key={i}
-              className="border border-primary rounded-sm bg-background transition-all hover:drop-shadow-glow hover:scale-90"
+              className="border border-primary rounded-sm bg-background transition-all hover:drop-shadow-primary-glow hover:scale-75"
             />
           );
         })}

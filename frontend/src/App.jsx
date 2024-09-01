@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 
 import { AppRoutes } from "./constants/routes";
 import SignUpPage from "./pages/sign-up/page";
+import SignInPage from "./pages/sign-in/page";
 import RootPage from "./pages/root/page";
 import { Grid } from "./components/grid";
 import { Orb } from "./components/orb";
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path={AppRoutes.root} element={<RootPage />} />
         <Route path={AppRoutes.signUp} element={<SignUpPage />} />
+        <Route path={AppRoutes.signIn} element={<SignInPage />} />
       </Routes>
     </main>
   );

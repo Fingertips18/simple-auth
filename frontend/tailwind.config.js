@@ -25,6 +25,10 @@ export default {
           "0 0px 15px var(--foreground)",
           "0 0px 60px var(--foreground)",
         ],
+        "primary-glow": [
+          "0 0px 15px var(--primary)",
+          "0 0px 60px var(--primary)",
+        ],
       },
     },
   },

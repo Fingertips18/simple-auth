@@ -1,11 +1,11 @@
-import { Lock, Mail, User, Loader } from "lucide-react";
+import { Mail, Lock, Loader } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
-import { PasswordStrengthMeter } from "../../../components/password-strength-meter";
+import { AppRoutes } from "../../../constants/routes";
 import { Input } from "../../../components/input";
 
-const SignUpForm = () => {
-  const [username, setUsername] = useState("");
+const SignInForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading] = useState(false);
@@ -16,14 +16,6 @@ const SignUpForm = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <Input
-        icon={User}
-        type="text"
-        placeholder="john doe"
-        value={username}
-        disabled={loading}
-        onChange={(e) => setUsername(e.target.value)}
-      />
       <Input
         icon={Mail}
         type="email"
@@ -40,8 +32,12 @@ const SignUpForm = () => {
         disabled={loading}
         onChange={(e) => setPassword(e.target.value)}
       />
-
-      <PasswordStrengthMeter password={password} />
+      <Link
+        to={AppRoutes.forgotPassword}
+        className="text-sm text-dark-accent hover:underline underline-offset-4 font-semibold"
+      >
+        Forgot Password?
+      </Link>
 
       <button
         className="mt-5 w-full py-3 px-4 bg-accent font-bold rounded-lg shadow-lg hover:brightness-90
@@ -49,10 +45,10 @@ const SignUpForm = () => {
         type="submit"
         disabled={loading}
       >
-        {loading ? <Loader className="w-5 h-5 animate-spin" /> : "Sign Up"}
+        {loading ? <Loader className="w-5 h-5 animate-spin" /> : "Sign In"}
       </button>
     </form>
   );
 };
 
-export { SignUpForm };
+export { SignInForm };
