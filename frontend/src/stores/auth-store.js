@@ -39,6 +39,30 @@ export const useAuthStore = create((set) => ({
       set({ loading: false });
     }
   },
+  signIn: async (email, password) => {
+    set({ loading: true, success: null, error: null });
+    try {
+      const response = await axios.post(`${baseUrl}${AppRoutes.signIn}`, {
+        email,
+        password,
+      });
+      set({
+        user: response.data.user,
+        success:
+          response.data.message ||
+          "Congratulations! You have signed in successfully",
+        isAuthenticated: true,
+      });
+    } catch (error) {
+      set({
+        error: error.response.data.message || "Error signing in",
+        isAuthenticated: false,
+      });
+      throw error;
+    } finally {
+      set({ loading: false });
+    }
+  },
   verifyEmail: async (code) => {
     set({ loading: true, success: null, error: null });
     try {

@@ -12,7 +12,7 @@ export const verifyToken = async (req, res, next) => {
   try {
     const payload = (await jwtVerify(token, secretKey)).payload;
 
-    if (!payload || !payload.userId || Date.now() > payload.exp) {
+    if (!payload || !payload.userId) {
       throw new Error("Invalid token!");
     }
 

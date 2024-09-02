@@ -1,18 +1,28 @@
 import { Mail, Lock, Loader } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { toast } from "sonner";
 
 import { ValidateEmail, ValidatePassword } from "../../../utils/validations";
+import { useAuthStore } from "../../../stores/auth-store";
 import { AppRoutes } from "../../../constants/routes";
 import { Input } from "../../../components/input";
 
 const SignInForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading] = useState(false);
+  const { loading, signIn, success, error: Error } = useAuthStore();
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+      await signIn(email, password);
+      toast.success(success);
+    } catch (error) {
+      console.error(error);
+      toast.error(Error);
+    }
   };
 
   const emailValid = ValidateEmail(email);
