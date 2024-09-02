@@ -13,7 +13,7 @@ export const useAuthStore = create((set) => ({
   success: null,
   error: null,
   loading: false,
-  verified: false,
+  isVerifying: true,
   signUp: async (username, email, password) => {
     set({ loading: true, success: null, error: null });
     try {
@@ -24,9 +24,7 @@ export const useAuthStore = create((set) => ({
       });
       set({
         user: response.data.user,
-        success:
-          response.data.message ||
-          "Congratulations! You have signed up successfully",
+        success: response.data.message || "Congratulations! You have signed up",
         isAuthenticated: true,
       });
     } catch (error) {
@@ -48,14 +46,33 @@ export const useAuthStore = create((set) => ({
       });
       set({
         user: response.data.user,
-        success:
-          response.data.message ||
-          "Congratulations! You have signed in successfully",
+        success: response.data.message || "Congratulations! You have signed in",
         isAuthenticated: true,
       });
     } catch (error) {
       set({
         error: error.response.data.message || "Error signing in",
+        isAuthenticated: false,
+      });
+      throw error;
+    } finally {
+      set({ loading: false });
+    }
+  },
+  signOut: async () => {
+    set({ loading: true, success: null, error: null });
+
+    try {
+      const response = await axios.post(`${baseUrl}${AppRoutes.signOut}`);
+      set({
+        user: null,
+        success:
+          response.data.message || "Congratulations! You have signed out",
+        isAuthenticated: false,
+      });
+    } catch (error) {
+      set({
+        error: error.response.data.message || "Error signing out",
         isAuthenticated: false,
       });
       throw error;
@@ -87,21 +104,21 @@ export const useAuthStore = create((set) => ({
     }
   },
   verifyToken: async () => {
-    set({ loading: true, verified: false, success: null, error: null });
+    set({ loading: true, isVerifying: true, success: null, error: null });
     try {
       const response = await axios.get(`${baseUrl}${AppRoutes.verifyToken}`);
       set({
         user: response.data.user,
-        verified: true,
+        success: response.data.message,
         isAuthenticated: true,
       });
-    } catch {
+    } catch (error) {
       set({
-        verified: false,
         isAuthenticated: false,
+        error: error.response.data.message,
       });
     } finally {
-      set({ loading: false });
+      set({ loading: false, isVerifying: false });
     }
   },
 }));

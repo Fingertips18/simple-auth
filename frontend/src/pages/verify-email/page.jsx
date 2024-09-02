@@ -1,11 +1,8 @@
-import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import { VerifyEmailForm } from "./_components/verify-email-form";
 
 const VerifyEmailPage = () => {
-  const navigate = useNavigate();
-
   return (
     <motion.section
       initial={{ opacity: 0, y: 20 }}

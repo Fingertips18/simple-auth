@@ -1,15 +1,15 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useEffect } from "react";
 
+import { LoadingSpinner } from "../components/loading-spinner";
 import { useAuthStore } from "../stores/auth-store";
 import { AppRoutes } from "../constants/routes";
 
 const ProtectedGuard = () => {
-  const { verifyToken, isAuthenticated, user } = useAuthStore();
+  const { isVerifying, isAuthenticated, user } = useAuthStore();
 
-  useEffect(() => {
-    verifyToken();
-  }, [verifyToken]);
+  if (isVerifying) {
+    return <LoadingSpinner />;
+  }
 
   if (!isAuthenticated) {
     return <Navigate to={AppRoutes.signIn} replace />;
