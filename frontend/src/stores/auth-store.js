@@ -3,7 +3,10 @@ import axios from "axios";
 
 import { AppRoutes } from "../constants/routes";
 
-const baseUrl = `${import.meta.env.VITE_BASE_URL}/api/auth`;
+const baseUrl =
+  import.meta.env.MODE === "development"
+    ? `${import.meta.env.VITE_BASE_URL}/api/auth`
+    : "/api/auth";
 
 axios.defaults.withCredentials = true;
 
