@@ -7,6 +7,7 @@ import ResetPasswordPage from "./pages/reset-password/page";
 import VerifyEmailPage from "./pages/verify-email/page";
 import ProtectedGuard from "./guards/protected-guard";
 import { useAuthStore } from "./stores/auth-store";
+import NotFoundPage from "./pages/not-found/page";
 import { AppRoutes } from "./constants/routes";
 import SignUpPage from "./pages/sign-up/page";
 import SignInPage from "./pages/sign-in/page";
@@ -43,6 +44,7 @@ function App() {
           />
         </Route>
         <Route path={AppRoutes.verifyEmail} element={<VerifyEmailPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Toaster richColors position="top-center" pauseWhenPageIsHidden />
     </main>

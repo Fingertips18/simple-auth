@@ -1,6 +1,5 @@
 import cookieParser from "cookie-parser";
 import favicon from "serve-favicon";
-import { fileURLToPath } from "url";
 import express from "express";
 import dotenv from "dotenv";
 import path from "path";
@@ -15,19 +14,26 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const __dirname = path.resolve();
 
 app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
-// Setup favicon
-const __fileName = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__fileName);
-app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
+if (process.env.NODE_ENV === "development") {
+  app.use(favicon(path.join(__dirname, "/backend/public", "favicon.ico")));
+  app.use(Routes.root.path, rootRoutes);
+}
 
-// Setup routes
-app.use(Routes.root.path, rootRoutes);
 app.use(Routes.auth.path, authRoutes);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+  app.get("*", (_, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+  });
+}
 
 app.listen(PORT, () => {
   connectDb();
