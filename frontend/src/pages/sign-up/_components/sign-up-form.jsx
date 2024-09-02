@@ -14,13 +14,14 @@ const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { signUp, loading, error: Error } = useAuthStore();
+  const { signUp, loading, success, error: Error } = useAuthStore();
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
     try {
       await signUp(username, email, password);
+      toast.success(success);
       navigate(AppRoutes.verifyEmail);
     } catch (error) {
       console.error(error);

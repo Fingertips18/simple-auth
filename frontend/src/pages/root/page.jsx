@@ -13,7 +13,7 @@ const RootPage = () => {
         ease: "easeOut",
         duration: 1,
       }}
-      className="w-full h-full flex-center z-50 relative"
+      className="w-full h-full flex-center z-50 relative lg:px-4"
     >
       <motion.h1
         initial={{ scale: 0 }}

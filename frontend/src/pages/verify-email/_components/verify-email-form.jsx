@@ -1,11 +1,16 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+
+import { useAuthStore } from "../../../stores/auth-store";
+import { AppRoutes } from "../../../constants/routes";
 
 const VerifyEmailForm = () => {
   const [code, setCode] = useState(["", "", "", ""]);
   const [submittedCode, setSubmittedCode] = useState([]);
   const inputRef = useRef([]);
-  const [loading] = useState(false);
+  const navigate = useNavigate();
+  const { verifyEmail, loading, success, error: Error } = useAuthStore();
 
   const onChange = (value, index) => {
     if (index === 3 && value.length > 1) return;
@@ -40,22 +45,26 @@ const VerifyEmailForm = () => {
     }
   };
 
-  const onSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
+  const onSubmit = async (e) => {
+    e.preventDefault();
 
-      const verificationCode = code.join("");
-      toast.success(`Verification code submitted: ${verificationCode}`);
-    },
-    [code]
-  );
+    const verificationCode = code.join("");
+
+    try {
+      await verifyEmail(verificationCode);
+      toast.success(success);
+      navigate(AppRoutes.root);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     if (code.every((digit) => digit !== "") && submittedCode !== code) {
       setSubmittedCode(code);
       onSubmit(new Event("submit"));
     }
-  }, [code, submittedCode, onSubmit]);
+  }, [code, submittedCode]);
 
   const disabled = code.join("").length !== 4;
 
@@ -78,6 +87,11 @@ const VerifyEmailForm = () => {
           />
         ))}
       </div>
+      {Error && (
+        <p className="text-red-500 font-semibold mt-2 text-sm text-center">
+          {Error}
+        </p>
+      )}
       <button
         className="mt-5 w-full py-3 px-4 bg-accent font-bold rounded-lg shadow-lg hover:brightness-90
         focus:outline-none hover:drop-shadow-glow transition duration-200 flex-center active:scale-90

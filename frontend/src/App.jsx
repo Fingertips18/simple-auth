@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { Toaster } from "sonner";
 
 import VerifyEmailPage from "./pages/verify-email/page";
 import { AppRoutes } from "./constants/routes";
@@ -19,6 +20,7 @@ function App() {
         <Route path={AppRoutes.signIn} element={<SignInPage />} />
         <Route path={AppRoutes.verifyEmail} element={<VerifyEmailPage />} />
       </Routes>
+      <Toaster richColors position="top-center" pauseWhenPageIsHidden />
     </main>
   );
 }
