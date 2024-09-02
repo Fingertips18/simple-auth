@@ -1,23 +1,37 @@
 import { Lock, Mail, User, Loader } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { toast } from "sonner";
 
 import { PasswordStrengthMeter } from "../../../components/password-strength-meter";
 import { ValidateEmail, ValidatePassword } from "../../../utils/validations";
+import { useAuthStore } from "../../../stores/auth-store";
+import { AppRoutes } from "../../../constants/routes";
 import { Input } from "../../../components/input";
 
 const SignUpForm = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading] = useState(false);
+  const navigate = useNavigate();
+  const { signUp, loading, error: Error } = useAuthStore();
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+      await signUp(username, email, password);
+      navigate(AppRoutes.verifyEmail);
+    } catch (error) {
+      console.error(error);
+      toast.error(Error);
+    }
   };
 
   const usernameValid = username.length > 3;
   const emailValid = ValidateEmail(email);
   const passwordValid = ValidatePassword(password).allCriteriaMet;
+
   const disabled =
     !username ||
     !usernameValid ||
