@@ -2,6 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
 import { Toaster } from "sonner";
 
+import ForgotPasswordPage from "./pages/forgot-password/page";
+import ResetPasswordPage from "./pages/reset-password/page";
 import VerifyEmailPage from "./pages/verify-email/page";
 import ProtectedGuard from "./guards/protected-guard";
 import { useAuthStore } from "./stores/auth-store";
@@ -31,6 +33,14 @@ function App() {
         <Route element={<AuthGuard />}>
           <Route path={AppRoutes.signUp} element={<SignUpPage />} />
           <Route path={AppRoutes.signIn} element={<SignInPage />} />
+          <Route
+            path={AppRoutes.forgotPassword}
+            element={<ForgotPasswordPage />}
+          />
+          <Route
+            path={`${AppRoutes.resetPassword}/:token`}
+            element={<ResetPasswordPage />}
+          />
         </Route>
         <Route path={AppRoutes.verifyEmail} element={<VerifyEmailPage />} />
       </Routes>

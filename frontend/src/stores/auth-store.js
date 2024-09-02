@@ -80,6 +80,54 @@ export const useAuthStore = create((set) => ({
       set({ loading: false });
     }
   },
+  forgotPassword: async (email) => {
+    set({ loading: true, success: null, error: null });
+    try {
+      const response = await axios.post(
+        `${baseUrl}${AppRoutes.forgotPassword}`,
+        {
+          email,
+        }
+      );
+      set({
+        success:
+          response.data.message ||
+          "An email has been sent to reset your password",
+      });
+    } catch (error) {
+      set({
+        error:
+          error.response.data.message || "Error sending email reset password",
+      });
+      throw error;
+    } finally {
+      set({ loading: false });
+    }
+  },
+  resetPassword: async (token, password) => {
+    set({ loading: true, success: null, error: null });
+    try {
+      const response = await axios.post(
+        `${baseUrl}${AppRoutes.resetPassword}/${token}`,
+        {
+          token,
+          password,
+        }
+      );
+      set({
+        success:
+          response.data.message ||
+          "Congratulations! You have successfully reset your password",
+      });
+    } catch (error) {
+      set({
+        error: error.response.data.message || "Error resetting password",
+      });
+      throw error;
+    } finally {
+      set({ loading: false });
+    }
+  },
   verifyEmail: async (code) => {
     set({ loading: true, success: null, error: null });
     try {
