@@ -13,7 +13,7 @@ export const useAuthStore = create((set) => ({
   success: null,
   error: null,
   loading: false,
-  isCheckingAuth: true,
+  verified: false,
   signUp: async (username, email, password) => {
     set({ loading: true, success: null, error: null });
     try {
@@ -58,6 +58,24 @@ export const useAuthStore = create((set) => ({
         isAuthenticated: false,
       });
       throw error;
+    } finally {
+      set({ loading: false });
+    }
+  },
+  verifyToken: async () => {
+    set({ loading: true, verified: false, success: null, error: null });
+    try {
+      const response = await axios.get(`${baseUrl}${AppRoutes.verifyToken}`);
+      set({
+        user: response.data.user,
+        verified: true,
+        isAuthenticated: true,
+      });
+    } catch {
+      set({
+        verified: false,
+        isAuthenticated: false,
+      });
     } finally {
       set({ loading: false });
     }

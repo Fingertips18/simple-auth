@@ -5,14 +5,14 @@ import { secretKey } from "../constants/keys.constant.js";
 export const verifyToken = async (req, res, next) => {
   const token = req.cookies.token;
 
-  try {
-    if (!token) {
-      throw new Error("Unauthorized! No token provided");
-    }
+  if (!token) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
 
+  try {
     const payload = (await jwtVerify(token, secretKey)).payload;
 
-    if (!payload || !payload.userId) {
+    if (!payload || !payload.userId || Date.now() > payload.exp) {
       throw new Error("Invalid token!");
     }
 
