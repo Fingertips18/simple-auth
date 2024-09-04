@@ -1,4 +1,4 @@
-import { Lock, Mail, User, Loader } from "lucide-react";
+import { Lock, Mail, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -7,6 +7,7 @@ import { PasswordStrengthMeter } from "../../../components/password-strength-met
 import { ValidateEmail, ValidatePassword } from "../../../utils/validations";
 import { useAuthStore } from "../../../stores/auth-store";
 import { AppRoutes } from "../../../constants/routes";
+import { Button } from "../../../components/button";
 import { Input } from "../../../components/input";
 
 const SignUpForm = () => {
@@ -82,15 +83,7 @@ const SignUpForm = () => {
 
       <PasswordStrengthMeter password={password} />
 
-      <button
-        className="mt-5 w-full py-3 px-4 bg-accent font-bold rounded-lg shadow-lg hover:brightness-90
-        focus:outline-none hover:drop-shadow-glow transition duration-200 active:scale-90 flex-center
-        disabled:bg-accent/50 disabled:text-foreground/50 disabled:pointer-events-none"
-        type="submit"
-        disabled={loading || disabled}
-      >
-        {loading ? <Loader className="w-5 h-5 animate-spin" /> : "Sign Up"}
-      </button>
+      <Button loading={loading} disabled={disabled} label="Sign Up" />
     </form>
   );
 };

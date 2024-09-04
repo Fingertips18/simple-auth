@@ -4,6 +4,7 @@ import { toast } from "sonner";
 
 import { useAuthStore } from "../../../stores/auth-store";
 import { AppRoutes } from "../../../constants/routes";
+import { Button } from "../../../components/button";
 
 const VerifyEmailForm = () => {
   const [code, setCode] = useState(["", "", "", ""]);
@@ -92,15 +93,14 @@ const VerifyEmailForm = () => {
           {Error}
         </p>
       )}
-      <button
-        className="mt-5 w-full py-3 px-4 bg-accent font-bold rounded-lg shadow-lg hover:brightness-90
-        focus:outline-none hover:drop-shadow-glow transition duration-200 flex-center active:scale-90
-        disabled:bg-accent/50 disabled:text-foreground/50 disabled:pointer-events-none"
-        type="submit"
-        disabled={loading || disabled}
-      >
-        {loading ? "Verifying..." : "Verify Email"}
-      </button>
+
+      <Button
+        loading={loading}
+        disabled={disabled}
+        label="Verify Email"
+        withLoader={false}
+        loadingLabel="Verifying..."
+      />
     </form>
   );
 };

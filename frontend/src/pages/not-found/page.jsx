@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 import { AppRoutes } from "../../constants/routes";
+import { Button } from "../../components/button";
 
 const NotFoundPage = () => {
   const navigate = useNavigate();
@@ -11,14 +12,11 @@ const NotFoundPage = () => {
         404 | Page not found
       </h3>
 
-      <button
-        className="w-full py-3 px-4 bg-accent font-bold rounded-lg shadow-lg hover:brightness-90
-        focus:outline-none hover:drop-shadow-glow transition duration-200 active:scale-90 flex-center
-        disabled:bg-accent/50 disabled:text-foreground/50 disabled:pointer-events-none"
+      <Button
+        type="button"
+        label="Go to Home"
         onClick={() => navigate(AppRoutes.root)}
-      >
-        Go to Home
-      </button>
+      />
     </section>
   );
 };
