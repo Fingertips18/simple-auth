@@ -44,10 +44,6 @@ const AuthController = {
 
       return res.status(201).json({
         message: "User created successfully",
-        user: {
-          ...user._doc,
-          password: undefined,
-        },
       });
     } catch (error) {
       console.error("Sign up failed!", error);

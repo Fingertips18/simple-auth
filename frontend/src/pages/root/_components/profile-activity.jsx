@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-import { formatDate } from "../../../utils/date";
+import { formatDate } from "@/lib/utils/date";
 
 const ProfileActivity = ({ lastSignedIn, createdAt }) => {
   return (

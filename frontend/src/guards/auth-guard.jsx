@@ -1,17 +1,12 @@
 import { Navigate, Outlet } from "react-router-dom";
 
-import { LoadingSpinner } from "../components/loading-spinner";
-import { useAuthStore } from "../stores/auth-store";
-import { AppRoutes } from "../constants/routes";
+import { useAuthStore } from "@/lib/stores/authStore";
+import { AppRoutes } from "@/constants/routes";
 
 const AuthGuard = () => {
-  const { isVerifying, isAuthenticated, user } = useAuthStore();
+  const { authorized, user } = useAuthStore();
 
-  if (isVerifying) {
-    return <LoadingSpinner />;
-  }
-
-  if (isAuthenticated && user.isVerified) {
+  if (authorized && user.isVerified) {
     return <Navigate to={AppRoutes.root} replace />;
   }
 

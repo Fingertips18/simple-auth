@@ -1,15 +1,27 @@
 import { motion } from "framer-motion";
 import { Loader } from "lucide-react";
+import { useState } from "react";
 import { toast } from "sonner";
 
-const SignOutButton = ({ loading, success, error: Error, signOut }) => {
+import { AuthService } from "@/lib/services/auth.service";
+import { useAuthStore } from "@/lib/stores/authStore";
+
+const SignOutButton = () => {
+  const [loading, setLoading] = useState(false);
+  const { setUser } = useAuthStore();
+
   const onClick = async () => {
+    setLoading(true);
+
     try {
-      await signOut();
-      toast.success(success);
+      const result = await AuthService.signOut();
+      setUser(null);
+      toast.success(result.message);
     } catch (error) {
       console.error(error);
-      toast.error(Error);
+      toast.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 

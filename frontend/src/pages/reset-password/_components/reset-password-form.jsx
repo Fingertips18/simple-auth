@@ -3,29 +3,33 @@ import { Lock } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
-import { ValidatePassword } from "../../../utils/validations";
-import { useAuthStore } from "../../../stores/auth-store";
-import { AppRoutes } from "../../../constants/routes";
-import { Button } from "../../../components/button";
-import { Input } from "../../../components/input";
+import { ValidatePassword } from "@/lib/utils/validations";
+import { AuthService } from "@/lib/services/auth.service";
+import { AppRoutes } from "@/constants/routes";
+import { Button } from "@/components/button";
+import { Input } from "@/components/input";
 
 const ResetPasswordForm = () => {
+  const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const { loading, resetPassword, success, error: Error } = useAuthStore();
   const { token } = useParams();
   const navigate = useNavigate();
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
+    setLoading(true);
+
     try {
-      await resetPassword(token, password);
-      toast.success(success);
+      const result = await AuthService.resetPassword(token, password);
+      toast.success(result.message);
       navigate(AppRoutes.signIn);
     } catch (error) {
       console.error(error);
-      toast.error(Error);
+      toast.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
