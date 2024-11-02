@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
+import { AppRoutes } from "@/constants/routes";
+
 import { ForgotPasswordForm } from "./_components/forgot-password-form";
-import { AppRoutes } from "../../constants/routes";
 
 const ForgotPasswordPage = () => {
   return (
@@ -15,7 +16,7 @@ const ForgotPasswordPage = () => {
       transition={{
         duration: 0.5,
       }}
-      className="max-w-md w-full bg-secondary bg-opacity-20 backdrop-filter backdrop-blur-md rounded-lg shadow-2xl overflow-hidden"
+      className="max-w-md w-full bg-secondary bg-opacity-20 backdrop-filter backdrop-blur-md rounded-lg shadow-2xl overflow-hidden mx-4 lg:mx-0"
     >
       <div className="p-4 lg:p-8">
         <h2 className="text-3xl font-bold mb-6 text-center bg-clip-text">

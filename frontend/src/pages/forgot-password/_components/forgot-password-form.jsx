@@ -1,27 +1,32 @@
+import { Button } from "@/components/button";
 import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
-import { ValidateEmail } from "../../../utils/validations";
-import { useAuthStore } from "../../../stores/auth-store";
-import { Button } from "../../../components/button";
-import { Input } from "../../../components/input";
+import { AuthService } from "@/lib/services/auth.service";
+import { ValidateEmail } from "@/lib/utils/validations";
+import { Input } from "@/components/input";
 
 const ForgotPasswordForm = () => {
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const { loading, forgotPassword, success, error: Error } = useAuthStore();
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    setLoading(true);
+
     try {
-      await forgotPassword(email);
+      const result = await AuthService.forgotPassword(email);
       setSubmitted(true);
-      toast.success(success);
+      toast.success(result.message);
     } catch (error) {
       console.error(error);
-      toast.error(Error);
+      toast.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 

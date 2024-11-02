@@ -1,17 +1,19 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
-import { useAuthStore } from "../../../stores/auth-store";
-import { AppRoutes } from "../../../constants/routes";
-import { Button } from "../../../components/button";
+import { AuthService } from "@/lib/services/auth.service";
+import { useAuthStore } from "@/lib/stores/authStore";
+import { AppRoutes } from "@/constants/routes";
+import { Button } from "@/components/button";
 
 const VerifyEmailForm = () => {
+  const [loading, setLoading] = useState(false);
   const [code, setCode] = useState(["", "", "", ""]);
   const [submittedCode, setSubmittedCode] = useState([]);
+  const { setUser } = useAuthStore();
   const inputRef = useRef([]);
   const navigate = useNavigate();
-  const { verifyEmail, loading, success, error: Error } = useAuthStore();
 
   const onChange = (value, index) => {
     if (index === 3 && value.length > 1) return;
@@ -46,26 +48,34 @@ const VerifyEmailForm = () => {
     }
   };
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
 
-    const verificationCode = code.join("");
+      const verificationCode = code.join("");
 
-    try {
-      await verifyEmail(verificationCode);
-      toast.success(success);
-      navigate(AppRoutes.root);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+      setLoading(true);
+
+      try {
+        const result = await AuthService.verifyEmail(verificationCode);
+        setUser(result.user);
+        toast.success(result.message);
+        navigate(AppRoutes.root);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [code, setUser, navigate]
+  );
 
   useEffect(() => {
     if (code.every((digit) => digit !== "") && submittedCode !== code) {
       setSubmittedCode(code);
       onSubmit(new Event("submit"));
     }
-  }, [code, submittedCode]);
+  }, [code, submittedCode, onSubmit]);
 
   const disabled = code.join("").length !== 4;
 

@@ -4,7 +4,7 @@ import {
   NumberRegex,
   SpecialRegex,
   UpperCaseRegex,
-} from "../constants/regex";
+} from "../../constants/regex";
 
 export const ValidatePassword = (password) => {
   const criteria = [

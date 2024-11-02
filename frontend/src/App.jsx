@@ -1,12 +1,10 @@
 import { Route, Routes } from "react-router-dom";
-import { useEffect } from "react";
 import { Toaster } from "sonner";
 
 import ForgotPasswordPage from "./pages/forgot-password/page";
 import ResetPasswordPage from "./pages/reset-password/page";
 import VerifyEmailPage from "./pages/verify-email/page";
 import ProtectedGuard from "./guards/protected-guard";
-import { useAuthStore } from "./stores/auth-store";
 import NotFoundPage from "./pages/not-found/page";
 import { AppRoutes } from "./constants/routes";
 import SignUpPage from "./pages/sign-up/page";
@@ -17,12 +15,6 @@ import { Grid } from "./components/grid";
 import { Orb } from "./components/orb";
 
 function App() {
-  const { verifyToken } = useAuthStore();
-
-  useEffect(() => {
-    verifyToken();
-  }, [verifyToken]);
-
   return (
     <main className="min-h-dvh flex-center bg-background overflow-hidden relative">
       <Orb />

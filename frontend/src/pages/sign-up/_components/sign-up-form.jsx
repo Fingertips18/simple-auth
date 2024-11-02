@@ -3,30 +3,34 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "sonner";
 
-import { PasswordStrengthMeter } from "../../../components/password-strength-meter";
-import { ValidateEmail, ValidatePassword } from "../../../utils/validations";
-import { useAuthStore } from "../../../stores/auth-store";
-import { AppRoutes } from "../../../constants/routes";
-import { Button } from "../../../components/button";
-import { Input } from "../../../components/input";
+import { PasswordStrengthMeter } from "@/components/password-strength-meter";
+import { ValidateEmail, ValidatePassword } from "@/lib/utils/validations";
+import { AuthService } from "@/lib/services/auth.service";
+import { AppRoutes } from "@/constants/routes";
+import { Button } from "@/components/button";
+import { Input } from "@/components/input";
 
 const SignUpForm = () => {
+  const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { signUp, loading, success, error: Error } = useAuthStore();
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
+    setLoading(true);
+
     try {
-      await signUp(username, email, password);
-      toast.success(success);
+      const result = await AuthService.signUp(username, email, password);
+      toast.success(result.message);
       navigate(AppRoutes.verifyEmail);
     } catch (error) {
       console.error(error);
-      toast.error(Error);
+      toast.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 

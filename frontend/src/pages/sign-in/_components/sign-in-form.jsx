@@ -3,26 +3,33 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "sonner";
 
-import { ValidateEmail, ValidatePassword } from "../../../utils/validations";
-import { useAuthStore } from "../../../stores/auth-store";
-import { AppRoutes } from "../../../constants/routes";
-import { Button } from "../../../components/button";
-import { Input } from "../../../components/input";
+import { ValidateEmail, ValidatePassword } from "@/lib/utils/validations";
+import { AuthService } from "@/lib/services/auth.service";
+import { useAuthStore } from "@/lib/stores/authStore";
+import { AppRoutes } from "@/constants/routes";
+import { Button } from "@/components/button";
+import { Input } from "@/components/input";
 
 const SignInForm = () => {
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { loading, signIn, success, error: Error } = useAuthStore();
+  const { setUser } = useAuthStore();
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
+    setLoading(true);
+
     try {
-      await signIn(email, password);
-      toast.success(success);
+      const result = await AuthService.signIn(email, password);
+      setUser(result.user);
+      toast.success(result.message);
     } catch (error) {
       console.error(error);
-      toast.error(Error);
+      toast.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 

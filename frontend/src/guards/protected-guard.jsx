@@ -1,17 +1,27 @@
 import { Navigate, Outlet } from "react-router-dom";
+import { useEffect } from "react";
 
-import { LoadingSpinner } from "../components/loading-spinner";
-import { useAuthStore } from "../stores/auth-store";
-import { AppRoutes } from "../constants/routes";
+import { LoadingSpinner } from "@/components/loading-spinner";
+import { AuthService } from "@/lib/services/auth.service";
+import { useAuthStore } from "@/lib/stores/authStore";
+import { useFetch } from "@/lib/hooks/useFetch";
+import { AppRoutes } from "@/constants/routes";
 
 const ProtectedGuard = () => {
-  const { isVerifying, isAuthenticated, user } = useAuthStore();
+  const { authorized, setUser, user } = useAuthStore();
+  const { loading, data } = useFetch(AuthService.verifyToken);
 
-  if (isVerifying) {
+  useEffect(() => {
+    if (data) {
+      setUser(data.user);
+    }
+  }, [setUser, data]);
+
+  if (loading) {
     return <LoadingSpinner />;
   }
 
-  if (!isAuthenticated) {
+  if (!authorized) {
     return <Navigate to={AppRoutes.signIn} replace />;
   }
 

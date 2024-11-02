@@ -1,4 +1,4 @@
-![Banner](public/banner.png)
+![Banner](public/banner.webp)
 
 # 🔒 MERN-Auth
 
@@ -53,14 +53,14 @@ This repository features a **MERN** stack authentication system, encompassing us
 
 3. **Set up environment variables. Create a `.env` file in the root directory:**:
 
-   ```bash
-   MONGO_URI=your-mongo-uri
-   PORT=5000
-   JWT_SECRET=your-jwt-secret
-   NODE_ENV=development
-   MAILTRAP_TOKEN=your-mailtrap-token
-   MAILTRAP_TEMPLATE_ID=your-template-id
-   CLIENT_URL=your-client-url
+   ```dotenv
+   MONGO_URI=<MONGO_URI>
+   PORT=<PORT>
+   JWT_SECRET=<JWT_SECRET>
+   NODE_ENV=<NODE_ENV>
+   MAILTRAP_TOKEN=<MAILTRAP_TOKEN>
+   MAILTRAP_TEMPLATE_ID=<MAILTRAP_TEMPLATE_ID>
+   CLIENT_URL=<CLIENT_URL>
    ```
 
 4. **Run the backend server**:
@@ -85,7 +85,7 @@ This repository features a **MERN** stack authentication system, encompassing us
 3. **Set up environment variables. Create a `.env.local` file in the frontend directory**:
 
    ```bash
-   VITE_BASE_URL=http://localhost:5000  # Adjust the backend URL if necessary
+   VITE_BASE_URL=<VITE_BASE_URL>
    ```
 
 4. **Run the frontend server**:

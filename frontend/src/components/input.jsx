@@ -18,7 +18,7 @@ const Input = ({ icon: Icon, isValid, ...props }) => {
       <input
         {...props}
         type={type}
-        className={`w-full px-10 py-2 bg-secondary bg-opacity-50 rounded-lg border  outline-none
+        className={`w-full pl-10 py-2 bg-secondary bg-opacity-50 rounded-lg border  outline-none
         placeholder-foreground/40 transition disabled:bg-opacity-25 disabled:border-secondary/50 
         disabled:text-foreground/50 disabled:pointer-events-none
         ${
@@ -27,7 +27,8 @@ const Input = ({ icon: Icon, isValid, ...props }) => {
               ? "border-green-400 focus:border-green-500 focus:ring-1 focus:ring-green-500"
               : "border-red-400 focus:border-red-500 focus:ring-1 focus:ring-red-500"
             : "border-secondary focus:border-primary/20 focus:ring-2 focus:ring-primary"
-        }`}
+        }
+        ${isPassword && "pr-10"}`}
       />
       {isPassword && (
         <button

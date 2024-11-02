@@ -2,11 +2,11 @@ import { Check, X } from "lucide-react";
 
 import {
   LowerCaseRegex,
-  UpperCaseRegex,
   NumberRegex,
   SpecialRegex,
-} from "../constants/regex";
-import { ValidatePassword } from "../utils/validations";
+  UpperCaseRegex,
+} from "@/constants/regex";
+import { ValidatePassword } from "@/lib/utils/validations";
 
 const PasswordCriteria = ({ password }) => {
   const { criteria } = ValidatePassword(password);

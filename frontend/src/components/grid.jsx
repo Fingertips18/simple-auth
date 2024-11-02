@@ -1,4 +1,4 @@
-import { useGrid } from "../hooks/use-grid";
+import { useGrid } from "@/lib/hooks/useGrid";
 
 const size = 24;
 
