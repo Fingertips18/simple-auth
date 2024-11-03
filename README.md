@@ -4,7 +4,7 @@
 
 This repository features a **MERN** stack authentication system, encompassing user registration, login, and **JWT-based** session management. It securely handles passwords and token cookies, making it an excellent foundation for building secure and scalable web applications.
 
-### 🔗 Website Link: [Live](https://mern-auth-tau7.onrender.com/)
+### 🔗 Website Link: [Live](https://mern-auth-tau7.onrender.com)
 
 ## 📚 Table of Contents
 
@@ -54,12 +54,14 @@ This repository features a **MERN** stack authentication system, encompassing us
 3. **Set up environment variables. Create a `.env` file in the root directory:**:
 
    ```dotenv
-   MONGO_URI=<MONGO_URI>
    PORT=<PORT>
+   MONGO_URI=<MONGO_URI>
    JWT_SECRET=<JWT_SECRET>
    NODE_ENV=<NODE_ENV>
-   MAILTRAP_TOKEN=<MAILTRAP_TOKEN>
-   MAILTRAP_TEMPLATE_ID=<MAILTRAP_TEMPLATE_ID>
+   EMAILJS_SERVICE_ID=<EMAILJS_SERVICE_ID>
+   EMAILJS_TEMPLATE_ID=<EMAILJS_TEMPLATE_ID>
+   EMAILJS_PUBLIC_KEY=<EMAILJS_PUBLIC_KEY>
+   EMAILJS_PRIVATE_KEY=<EMAILJS_PRIVATE_KEY>
    CLIENT_URL=<CLIENT_URL>
    ```
 
@@ -84,7 +86,7 @@ This repository features a **MERN** stack authentication system, encompassing us
 
 3. **Set up environment variables. Create a `.env.local` file in the frontend directory**:
 
-   ```bash
+   ```dotenv
    VITE_BASE_URL=<VITE_BASE_URL>
    ```
 

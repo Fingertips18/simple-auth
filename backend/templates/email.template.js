@@ -1,22 +1,15 @@
-import { DarkColors, LightColors } from "../constants/colors.constant.js";
+import { Colors } from "../constants/colors.constant.js";
 
 export const VERIFICATION_EMAIL_TEMPLATE = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Verify Your Email</title>
-</head>
-<body style="font-family: Arial, sans-serif; line-height: 1.6; color: ${LightColors.foreground}; max-width: 600px; margin: 0 auto; padding: 20px;">
-  <div style="background: linear-gradient(to right, ${LightColors.primary}, ${LightColors.accent}); padding: 20px; text-align: center;">
-    <h1 style="color: ${DarkColors.foreground}; margin: 0;">Verify Your Email</h1>
+<div style="font-family: Arial, sans-serif; line-height: 1.6; color: ${Colors.foreground}; max-width: 600px; margin: 0 auto; padding: 20px;">
+  <div style="background: linear-gradient(to right, ${Colors.primary}, ${Colors.accent}); padding: 20px; text-align: center;">
+    <h1 style="color: ${Colors.foreground}; margin: 0;">Verify Your Email</h1>
   </div>
-  <div style="background-color: ${LightColors.background}; padding: 20px; border-radius: 0 0 5px 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-    <p>Hello,</p>
+  <div style="background-color: ${Colors.background}; padding: 20px; border-radius: 0 0 5px 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <p>Hello {username},</p>
     <p>Thank you for signing up! Your verification code is:</p>
     <div style="text-align: center; margin: 30px 0;">
-      <span style="font-size: 32px; font-weight: bold; letter-spacing: 5px; color: ${LightColors.primary};">{verificationCode}</span>
+      <span style="font-size: 32px; font-weight: bold; letter-spacing: 5px; color: ${Colors.primary};">{verificationCode}</span>
     </div>
     <p>Enter this code on the verification page to complete your registration.</p>
     <p>This code will expire in 15 minutes for security reasons.</p>
@@ -26,27 +19,19 @@ export const VERIFICATION_EMAIL_TEMPLATE = `
   <div style="text-align: center; margin-top: 20px; color: #888; font-size: 0.8em;">
     <p>This is an automated message, please do not reply to this email.</p>
   </div>
-</body>
-</html>
+</div>
 `;
 
 export const PASSWORD_RESET_SUCCESS_TEMPLATE = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Password Reset Successful</title>
-</head>
-<body style="font-family: Arial, sans-serif; line-height: 1.6; color: ${LightColors.foreground}; max-width: 600px; margin: 0 auto; padding: 20px;">
-  <div style="background: linear-gradient(to right, ${LightColors.primary}, ${LightColors.accent}); padding: 20px; text-align: center;">
-    <h1 style="color: ${DarkColors.foreground}; margin: 0;">Password Reset Successful</h1>
+<div style="font-family: Arial, sans-serif; line-height: 1.6; color: ${Colors.foreground}; max-width: 600px; margin: 0 auto; padding: 20px;">
+  <div style="background: linear-gradient(to right, ${Colors.primary}, ${Colors.accent}); padding: 20px; text-align: center;">
+    <h1 style="color: ${Colors.foreground}; margin: 0;">Password Reset Successful</h1>
   </div>
-  <div style="background-color: ${LightColors.background}; padding: 20px; border-radius: 0 0 5px 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-    <p>Hello,</p>
+  <div style="background-color: ${Colors.background}; padding: 20px; border-radius: 0 0 5px 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <p>Hello {username},</p>
     <p>We're writing to confirm that your password has been successfully reset.</p>
     <div style="text-align: center; margin: 30px 0;">
-      <div style="background-color: ${LightColors.primary}; color: ${DarkColors.foreground}; width: 50px; height: 50px; line-height: 50px; border-radius: 50%; display: inline-block; font-size: 30px;">
+      <div style="background-color: ${Colors.primary}; color: ${Colors.foreground}; width: 50px; height: 50px; line-height: 50px; border-radius: 50%; display: inline-block; font-size: 30px;">
         ✓
       </div>
     </div>
@@ -63,28 +48,20 @@ export const PASSWORD_RESET_SUCCESS_TEMPLATE = `
   <div style="text-align: center; margin-top: 20px; color: #888; font-size: 0.8em;">
     <p>This is an automated message, please do not reply to this email.</p>
   </div>
-</body>
-</html>
+</div>
 `;
 
 export const PASSWORD_RESET_REQUEST_TEMPLATE = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reset Your Password</title>
-</head>
-<body style="font-family: Arial, sans-serif; line-height: 1.6; color: ${LightColors.foreground}; max-width: 600px; margin: 0 auto; padding: 20px;">
-  <div style="background: linear-gradient(to right, ${LightColors.primary}, ${LightColors.accent}); padding: 20px; text-align: center;">
-    <h1 style="color: ${DarkColors.foreground}; margin: 0;">Password Reset</h1>
+<div style="font-family: Arial, sans-serif; line-height: 1.6; color: ${Colors.foreground}; max-width: 600px; margin: 0 auto; padding: 20px;">
+  <div style="background: linear-gradient(to right, ${Colors.primary}, ${Colors.accent}); padding: 20px; text-align: center;">
+    <h1 style="color: ${Colors.foreground}; margin: 0;">Password Reset</h1>
   </div>
-  <div style="background-color: ${LightColors.background}; padding: 20px; border-radius: 0 0 5px 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-    <p>Hello,</p>
+  <div style="background-color: ${Colors.background}; padding: 20px; border-radius: 0 0 5px 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <p>Hello {username},</p>
     <p>We received a request to reset your password. If you didn't make this request, please ignore this email.</p>
     <p>To reset your password, click the button below:</p>
     <div style="text-align: center; margin: 30px 0;">
-      <a href="{resetURL}" style="background-color: ${LightColors.primary}; color: ${DarkColors.foreground}; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">Reset Password</a>
+      <a href="{resetURL}" target="_blank" style="background-color: ${Colors.primary}; color: ${Colors.foreground}; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">Reset Password</a>
     </div>
     <p>This link will expire in 1 hour for security reasons.</p>
     <p>Best regards,<br>Fingertips</p>
@@ -92,6 +69,22 @@ export const PASSWORD_RESET_REQUEST_TEMPLATE = `
   <div style="text-align: center; margin-top: 20px; color: #888; font-size: 0.8em;">
     <p>This is an automated message, please do not reply to this email.</p>
   </div>
-</body>
-</html>
+</div>
+`;
+
+export const WELCOME_MESSAGE_TEMPLATE = `
+<div style="font-family: Arial, sans-serif; line-height: 1.6; color: ${Colors.foreground}; max-width: 600px; margin: 0 auto; padding: 20px;">
+  <div style="background: linear-gradient(to right, ${Colors.primary}, ${Colors.accent}); padding: 20px; text-align: center;">
+    <h1 style="color: ${Colors.foreground}; margin: 0;">Welcome to MERN Auth</h1>
+  </div>
+  <div style="background-color: ${Colors.background}; padding: 20px; border-radius: 0 0 5px 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <p>Hello {username},</p>
+    <p>We're thrilled to have you join our community!</p>
+    <p>If you have any questions, feel free to send email at <a href="email@example.com" style="color: %s;">email@example.com</a> to contact our support team.</p>
+    <p>Best regards,<br>The Team</p>
+  </div>
+  <div style="text-align: center; margin-top: 20px; color: #888; font-size: 0.8em;">
+    <p>This is an automated message, please do not reply to this email.</p>
+  </div>
+</div>
 `;

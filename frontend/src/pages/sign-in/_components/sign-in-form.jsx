@@ -14,7 +14,7 @@ const SignInForm = () => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setUser } = useAuthStore();
+  const { setUser, setAuthorized } = useAuthStore();
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -24,9 +24,9 @@ const SignInForm = () => {
     try {
       const result = await AuthService.signIn(email, password);
       setUser(result.user);
+      setAuthorized(true);
       toast.success(result.message);
     } catch (error) {
-      console.error(error);
       toast.error(error);
     } finally {
       setLoading(false);
