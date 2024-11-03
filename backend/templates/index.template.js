@@ -1,4 +1,4 @@
-import { LightColors } from "../constants/colors.constant.js";
+import { Colors } from "../constants/colors.constant.js";
 
 export const INDEX_TEMPLATE = `
 <!DOCTYPE html>
@@ -25,8 +25,8 @@ export const INDEX_TEMPLATE = `
       justify-content: center;
       height: 100dvh;
       font-family: 'Poppins', sans-serif;
-      background-color: ${LightColors.background};
-      color: ${LightColors.foreground};
+      background-color: ${Colors.background};
+      color: ${Colors.foreground};
     "
   >
     <h1>Welcome to MERN Auth | Backend</h1>

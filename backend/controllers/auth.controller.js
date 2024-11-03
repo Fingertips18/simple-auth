@@ -1,11 +1,8 @@
 import bcryptjs from "bcryptjs";
 import crypto from "crypto";
 
-import { sendEmailResetPassword } from "../utils/send-email-reset-password.js";
-import { sendEmailResetSuccess } from "../utils/send-email-reset-success.js";
-import { sendEmailVerification } from "../utils/send-email-verification.js";
 import { generateTokenCookie } from "../utils/generate-token-cookie.js";
-import { sendEmailWelcome } from "../utils/send-email-welcome.js";
+import { EmailService } from "../utils/email-service.js";
 import User from "../models/user.model.js";
 
 const AuthController = {
@@ -40,7 +37,11 @@ const AuthController = {
 
       await generateTokenCookie(res, user._id);
 
-      await sendEmailVerification(user.email, verificationToken);
+      await EmailService.sendEmailVerification(
+        user.username,
+        user.email,
+        verificationToken
+      );
 
       return res.status(201).json({
         message: "User created successfully",
@@ -115,7 +116,7 @@ const AuthController = {
 
       await user.save();
 
-      await sendEmailWelcome(user.username, user.email);
+      await EmailService.sendWelcomeMessage(user.username, user.email);
 
       res.status(200).json({
         message: "Email verified successfully!",
@@ -150,7 +151,11 @@ const AuthController = {
 
       user.save();
 
-      sendEmailResetPassword(user.email, resetPasswordToken);
+      await EmailService.sendEmailResetPassword(
+        user.username,
+        user.email,
+        resetPasswordToken
+      );
 
       res.status(200).json({
         message: "Password resent link has been sent to your email!",
@@ -186,7 +191,7 @@ const AuthController = {
 
       await user.save();
 
-      await sendEmailResetSuccess(user.email);
+      await EmailService.sendEmailResetSuccess(user.username, user.email);
 
       res.status(200).json({ message: "Password reset successful!" });
     } catch (error) {

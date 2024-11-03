@@ -27,7 +27,6 @@ const SignUpForm = () => {
       toast.success(result.message);
       navigate(AppRoutes.verifyEmail);
     } catch (error) {
-      console.error(error);
       toast.error(error);
     } finally {
       setLoading(false);

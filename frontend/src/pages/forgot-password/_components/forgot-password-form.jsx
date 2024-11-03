@@ -23,7 +23,6 @@ const ForgotPasswordForm = () => {
       setSubmitted(true);
       toast.success(result.message);
     } catch (error) {
-      console.error(error);
       toast.error(error);
     } finally {
       setLoading(false);

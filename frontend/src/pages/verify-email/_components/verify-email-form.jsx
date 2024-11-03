@@ -62,7 +62,7 @@ const VerifyEmailForm = () => {
         toast.success(result.message);
         navigate(AppRoutes.root);
       } catch (error) {
-        console.error(error);
+        toast.error(error);
       } finally {
         setLoading(false);
       }

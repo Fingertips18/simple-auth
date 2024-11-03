@@ -26,7 +26,6 @@ const ResetPasswordForm = () => {
       toast.success(result.message);
       navigate(AppRoutes.signIn);
     } catch (error) {
-      console.error(error);
       toast.error(error);
     } finally {
       setLoading(false);

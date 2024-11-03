@@ -1,21 +1,32 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { LoadingSpinner } from "@/components/loading-spinner";
 import { AuthService } from "@/lib/services/auth.service";
 import { useAuthStore } from "@/lib/stores/authStore";
-import { useFetch } from "@/lib/hooks/useFetch";
 import { AppRoutes } from "@/constants/routes";
 
 const ProtectedGuard = () => {
-  const { authorized, setUser, user } = useAuthStore();
-  const { loading, data } = useFetch(AuthService.verifyToken);
+  const { authorized, setAuthorized, user, setUser } = useAuthStore();
+  const [loading, setLoading] = useState(false);
+
+  const handleVerification = useCallback(async () => {
+    setLoading(true);
+
+    try {
+      const result = await AuthService.verifyToken();
+      setUser(result.user);
+      setAuthorized(true);
+    } catch {
+      setAuthorized(false);
+    } finally {
+      setLoading(false);
+    }
+  }, [setAuthorized, setUser, setLoading]);
 
   useEffect(() => {
-    if (data) {
-      setUser(data.user);
-    }
-  }, [setUser, data]);
+    handleVerification();
+  }, [handleVerification]);
 
   if (loading) {
     return <LoadingSpinner />;

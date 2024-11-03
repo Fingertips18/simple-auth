@@ -8,7 +8,7 @@ import { useAuthStore } from "@/lib/stores/authStore";
 
 const SignOutButton = () => {
   const [loading, setLoading] = useState(false);
-  const { setUser } = useAuthStore();
+  const { setUser, setAuthorized } = useAuthStore();
 
   const onClick = async () => {
     setLoading(true);
@@ -16,6 +16,7 @@ const SignOutButton = () => {
     try {
       const result = await AuthService.signOut();
       setUser(null);
+      setAuthorized(false);
       toast.success(result.message);
     } catch (error) {
       console.error(error);
