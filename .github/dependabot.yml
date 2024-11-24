@@ -2,7 +2,7 @@ version: 2
 updates:
   # Update npm dependencies in the backend directory
   - package-ecosystem: "npm"
-    directory: /backend
+    directory: /
     schedule:
       interval: "daily" # Check for updates every day
     commit-message:
