@@ -1,0 +1,23 @@
+version: 2
+updates:
+  # Update npm dependencies in the backend directory
+  - package-ecosystem: "npm"
+    directory: /backend
+    schedule:
+      interval: "daily" # Check for updates every day
+    commit-message:
+      prefix: "chore" # Use 'chore' prefix for the commit message
+      include: "scope" # Include the scope (dependency name) in the commit message
+    reviewers:
+      - Fingertips18
+
+  # Update npm dependencies in the client directory
+  - package-ecosystem: "npm"
+    directory: /frontend
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    reviewers:
+      - Fingertips18
