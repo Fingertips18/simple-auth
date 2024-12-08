@@ -21,7 +21,7 @@
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
-    "express": "^4.19.2",
+    "express": "^4.21.2",
     "jose": "^5.8.0",
     "mongoose": "^8.8.4",
     "serve-favicon": "^2.5.0"
